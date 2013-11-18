@@ -1,4 +1,0 @@
-DbProject
-=========
-
-Database project
