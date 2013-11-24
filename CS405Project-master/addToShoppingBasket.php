@@ -26,19 +26,23 @@
 	
 	while ($currItem = $result->fetch_array()) {
 		if (isset($_POST[$currItem[0]])) {
-			if (intval($_POST[$currItem[0]]) > 0) {
-				$inc = intval($_POST[$currItem[0]]);
+		    $inc = intval($_POST[$currItem[0]]);
+			if ($inc > 0) {
 				
 				$query="Select * From ShoppingBasket Where cID='$_SESSION[username]' AND itemId='$currItem[0]'";
 				$result2 = $mysqli->query($query);
 				
 				if ($result2->num_rows>0 )  // item exists in cart update quantity
 				{
-				$update = "UPDATE ShoppingBasket SET amount=amount+'$inc' WHERE itemId = '$currItem[0]' AND cID='$_SESSION[username]'";
-				$result2 = $mysqli->query($update);
+				    $update = "UPDATE ShoppingBasket SET amount=amount+'$inc' WHERE itemId =                
+				        '$currItem[0]' AND cID='$_SESSION[username]'";
+				    $result2 = $mysqli->query($update);
+				    
 				} else {   // does not exist, insert into shopping cart
-				$insert = "INSERT INTO ShoppingBasket VALUES ('$_SESSION[username]','$currItem[0]','$inc')";
-				$result2 = $mysqli->query($insert);
+				    $insert = "INSERT INTO ShoppingBasket VALUES 
+				        ('$_SESSION[username]','$currItem[0]','$inc')";
+				    $result2 = $mysqli->query($insert);
+				    
 				}
 				
 //				$updateResult = $mysqli->query($update);

@@ -563,6 +563,65 @@ a:hover {
 	padding: 30px;
 }
 
+a.menu-option
+{
+	padding-right: 20px;
+	float: right;
+}
+
+.header-div
+{
+	width: 40%;
+}
+
+.div-padding
+{
+	padding: 15px;
+}
+
+.div-inventory
+{
+	width: 100%;
+	height: 25px;
+	margin-left: 25px;
+}
+
+.inv-name, .inv-description, .inv-type, .inv-amount, .inv-price, .inv-promo
+{
+	position: relative;
+	float: left;
+	height: 25px;
+}
+
+.inv-name
+{
+	width: 15%;
+}
+
+.inv-description
+{
+	width: 30%;
+}
+
+.inv-type
+{
+	width: 10%;
+}
+
+.inv-amount
+{
+	width: 10%;
+}
+
+.inv-price
+{
+	width: 10%;
+}
+
+.inv-promo
+{
+	width: 10%;
+}
 
 .divider {
 	overflow: hidden;

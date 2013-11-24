@@ -12,17 +12,25 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
-<h2>The Store</h2>
+
+<h2 class="div-padding">A & G Company</h2>
 <title>Store</title>
 </head>
-<h4 align="right">	
-	Welcome <?php 
-			if (isset($_SESSION['username'])) {
-				echo $_SESSION['username']; 
-				?>
-	<a href="logout.php">Log Out </a><br> 
-	<a href="shoppingBasket.php">View Shopping Basket </a><br>
-	<a href="viewOrderHistory.php">View Order History </a><br>
+<div class="div-padding">    
+    <div class="header-div" style="float:left; font-weight: bold;">
+	    Welcome <?php 
+    			if (isset($_SESSION['username'])) {
+    				echo $_SESSION['username']; 
+    				?>!
+	</div>
+	
+	<div class="header-div" style="float:right;">
+	    <a href="logout.php" class="menu-option">Log Out </a>
+	    <a href="shoppingBasket.php" class="menu-option">Shopping Basket </a>
+    	<a href="viewOrderHistory.php" class="menu-option">Order History </a>
+    	
+	</div>
+	
 	<?php }
 	else {
 		echo "Guest";
@@ -30,14 +38,16 @@
 			<a href="loginForm.php">Log In </a><br> 	
 			<a href="registrationForm.php">Register As New User </a> 
 		<?php } ?><br>
-
-</h4>
+</div>
 <body>
-<?php include "message.php"?>
+<?//php include "message.php"?>
+
 <h1 align="center">
 <form method="POST" action="addToShoppingBasket.php"> 
 	<?php include 'displayInventory.php'; ?>
-	<input type="submit" value="Update">
+	<div align="right" style="margin-right:3%;">
+	    <input type="submit" value="Add To Cart">
+	</div>
 </form>
 </h1>
 </body>

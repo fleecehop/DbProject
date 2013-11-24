@@ -21,7 +21,7 @@ margin-left:auto;
 margin-right:auto;
 }
 </style>
-<h2>The Store</h2>
+<h2 class="div-padding">A & G Company</h2>
 <title>Log In</title>
 </head>
 <body>
@@ -29,8 +29,8 @@ margin-right:auto;
 <br> <br>
 <div class="box">
 <form method="POST" size="small" action="login.php" > 
-  Username: <input align ="left" type="text" name="username"><br>
-  Password: <input align = "left" type="password" name="password"><br>
+  Username: <br><input align ="left" type="text" name="username"><br><br>
+  Password: <br><input align = "left" type="password" name="password"><br><br>
   <input type="submit" value="Log In">
 </form> 
 </div>
