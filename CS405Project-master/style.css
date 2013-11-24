@@ -35,12 +35,14 @@ h1, h2, h3 {
 	padding: 0;
 	text-transform: uppercase;
 	font-weight: 300;
-	color: #7D7764;
 }
 
 h1 {
 	font-size: 2em;
 	background: #D8D8D8 ;
+	color: #7D7764;
+	margin:15px;
+	padding-right:25px;
 }
 
 h2 {
@@ -591,6 +593,7 @@ a.menu-option
 	position: relative;
 	float: left;
 	height: 25px;
+	text-align: center;
 }
 
 .inv-name

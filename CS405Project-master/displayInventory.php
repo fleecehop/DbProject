@@ -25,11 +25,11 @@
 		echo "Store";
 	}
 	echo "</b></div><br>";
-	*/
 	
-//	echo "<table align=\"center\" border = 2 bgcolor=\"#F0F0F0\"><tr>";
 	
-/*	
+	echo "<table align=\"center\" border = 2 bgcolor=\"#F0F0F0\"><tr>";
+	
+
 	echo "<td>Name</td><td>Description</td><td>Type</td><td>Amount In Stock</td><td>Price</td><td>Promotion (% off)</td>";
 	if (intval($_SESSION['privileges']) > 1) {
 		if (isset($_SESSION['promotions'])) {
@@ -44,7 +44,7 @@
 	
 	while ($row = $result->fetch_array()) {
 			echo "<tr>"; 
-			for ($i = $j; $i < $mysqli->field_count; $i++) {
+			for ($i = 1; $i < $mysqli->field_count; $i++) {
 				echo "<td>$row[$i]</td>";
 			}
 			if (!isset($_SESSION['view'])) { 
@@ -122,6 +122,10 @@
 	        
 	        switch ($i)
 	        {
+	            case 0:
+	                echo '<div class="inv-name" style="';
+	                break;
+	            
 	            case 1:
 	                echo '<div class="inv-name" style="';
 	                break;
@@ -159,17 +163,17 @@
         	    }
         	
             
-            //echo '<div class="inv-name">';
-            echo '<p style="font-size:medium;">';
-            if ($i == 5){echo "$";}
-			echo "$row[$i]";
-			if ($i == 6){echo "% off";}
-			echo "</p>";
-			echo '</div>';
+                //echo '<div class="inv-name">';
+                echo '<p style="font-size:medium;">';
+                if ($i == 5){echo "$";}
+    			echo "$row[$i]";
+    			if ($i == 6){echo "% off";}
+    			echo "</p>";
+    			echo '</div>';
 		    }
-		    else
+		    else if (!isset($_SESSION['view'])) 
 		    {
-		        echo '<input type=\"text\"name=\"$row[0]\">';
+		        echo "<input type=\"text\"name=\"$row[0]\">";
 		    }
 		}
 		

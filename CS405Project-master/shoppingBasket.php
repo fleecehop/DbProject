@@ -56,17 +56,22 @@ if (isset($_SESSION['privileges'])) {
 
 	// set up DB Query and execute it
 
-	$query = "SELECT I.itemId, I.name,I.description,I.type,I.quantity,I.price,I.promotion,B.amount FROM Inventory I, ShoppingBasket B WHERE I.itemId=B.itemId AND B.cID='$_SESSION[username]'";
+	$query = "SELECT I.itemId, I.name,I.description,I.promotion,B.amount,I.price FROM Inventory I, ShoppingBasket B WHERE I.itemId=B.itemId AND B.cID='$_SESSION[username]'";
+	
 	$result = $mysqli->query($query); // Execute the Query 
 	
-	echo "<h1 align=\"center\">";
+	echo '<h1 align="center" style="padding:25px;">';
 	
 	if($result->num_rows <1){
-	echo "There is nothing in your cart.";
+	echo "There is nothing in your basket.";
 	return false;
 	}
 	
-	echo "<br><br><b>Shopping Cart</b><br>";
+	echo "</h1>";
+	
+	echo '<h2 align="center" style="padding:10px; background: #B8B8B8; margin:15px;"><b>Shopping Basket</b></h2>';
+	
+	/*
 	echo "<table align=\"center\" border = 2 bgcolor=\"#F0F0F0\"><tr>";
 
 	
@@ -84,9 +89,148 @@ if (isset($_SESSION['privileges'])) {
 			echo "</tr>";
 	}
 	echo "</table>";
+	*/
+	
+	echo '<h1 align="center">';
+	echo "<br>";
+	
+	echo '<div class="div-inventory">';
+	    
+	    $j = 0;
+	    
+    	if (intval($_SESSION['privileges']) > 1) 
+    	{
+    		echo '<div class="inv-name" style="background-color: #F0F0F0;">';
+    	        echo '<p style="font-size:medium;">';
+    	            echo "<b>Item ID</b>";
+    	        echo '</p>';
+    	    echo '</div>';
+    	} 
+    	else 
+    	{
+    		$j = 1;
+    	}
+	
+	    echo '<div class="inv-name" style="background-color: #F0F0F0;">';
+	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+	            echo "<b>Name</b>";
+	        echo '</p>';
+	    echo '</div>';
+	    
+	    echo '<div class="inv-description" style="background-color: #F0F0F0;">';
+	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+	            echo "<b>Description</b>";
+	        echo '</p>';
+	    echo '</div>';
+	    
+	    echo '<div class="inv-promo" style="background-color: #F0F0F0;">';
+	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+	            echo "<b>Promotion</b>";
+	        echo '</p>';
+	    echo '</div>';
+	    
+	    echo '<div class="inv-amount" style="background-color: #F0F0F0;">';
+	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+	            echo "<b>Quantity</b>";
+	        echo '</p>';
+	    echo '</div>';
+	    
+	    echo '<div class="inv-price" style="background-color: #F0F0F0;">';
+	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+	            echo "<b>Price</b>";
+	        echo '</p>';
+	    echo '</div>';
+	    
+	echo '</div><br>';
+	
+	$count = 0;
+	
+	while ($row = $result->fetch_array()) 
+	{
+	    echo '<div class="div-inventory">';
+	    
+	    for ($i = 1; $i < $mysqli->field_count + 1; $i++) 
+	    {
+	        $field = 1;
+	        
+	        switch ($i)
+	        {
+	            case 0:
+	                echo '<div class="inv-name" style="';
+	                break;
+	            
+	            case 1:
+	                echo '<div class="inv-name" style="';
+	                break;
+	             
+	            case 2:
+	                echo '<div class="inv-description" style="';
+	                break;
+	            
+	            case 3:
+	                echo '<div class="inv-promo" style="';
+	                break;
+	            
+	            case 4:
+	                echo '<div class="inv-amount" style="';
+	                break;
+	                
+	            case 5:
+	                echo '<div class="inv-price" style="';
+	                break;
+	                
+	            default:
+	                $field = 0;
+            }
+            
+            if ($i != $mysqli->field_count && $field == 1)
+            {
+                if ($count % 2 == 0)
+        	    {
+            	    echo 'background-color: white;">';   
+        	    }
+        	    else
+        	    {
+        	        echo 'background-color: #F0F0F0;">';
+        	    }
+        	
+                echo '<p style="font-size:medium;">';
+                if ($i == 5)
+                {
+                    echo "$";
+                    $p1 = $row[$i];
+                    $p2 = $row[$i-1];
+                    $p3 = $p1 * $p2;
+                    echo "$p3";
+                }
+                else
+                {
+    			    echo "$row[$i]";
+			    }
+    			if ($i == 3){echo "% off";}
+    			echo "</p>";
+    			echo '</div>';
+		    }
+		    else
+		    {
+		        echo "<form method=\"POST\"action=\"removeFromShoppingBasket.php\">";
+    			echo "<input type=\"hidden\" name=\"itemId\" value=\"$row[0]\">";
+    			echo "<input type=\"submit\"value=\"Remove\"></form>";
+		    }
+		}
+		
+		$count++;
+		
+		echo '</div>';
+    }
+	
+	echo '<br>';
+	echo "</h1>";
+	echo '<br>';
+	
 	?>
 	<body>
-	<?php include "message.php"?>
+	<?php //include "message.php"?>
 	<form method="POST" action="addPendingOrder.php"> 
 	<input type="submit" value="Place Order">
 	</form>
