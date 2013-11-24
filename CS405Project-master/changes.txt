@@ -1,0 +1,10 @@
+//OrderContainsItem changes to Contains
+//ShoppingBasket changes to Basket
+//cID changes to uID
+//itemId changes to itemNumber 
+//orderNum changes to orderID
+//clef222 changes to mage223
+//Mtfbwy4; changes to u0688279
+//street,city,state,zip changes to address
+
+price shouldve been a double in our database its an int in the document?
