@@ -60,14 +60,12 @@ if (isset($_SESSION['privileges'])) {
 	
 	$result = $mysqli->query($query); // Execute the Query 
 	
-	echo '<h1 align="center" style="padding:25px;">';
-	
 	if($result->num_rows <1){
-	echo "There is nothing in your basket.";
+	    echo '<h1 align="center" style="padding:25px;">';
+	    echo "There is nothing in your basket.";
+	    echo "</h1>";
 	return false;
 	}
-	
-	echo "</h1>";
 	
 	echo '<h2 align="center" style="padding:10px; background: #B8B8B8; margin:15px;"><b>Shopping Basket</b></h2>';
 	
@@ -231,10 +229,13 @@ if (isset($_SESSION['privileges'])) {
 	?>
 	<body>
 	<?php //include "message.php"?>
+	
 	<form method="POST" action="addPendingOrder.php"> 
-	<input type="submit" value="Place Order">
+	    <div align="right" style="margin-right:25px;">
+	        <input type="submit" value="Place Order">
+	    </div>
 	</form>
-	</h1>
+	
 	</body>
 	</html>
 	
