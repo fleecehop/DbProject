@@ -63,7 +63,7 @@
 	    
     	if (intval($_SESSION['privileges']) > 1) 
     	{
-    		echo '<div class="inv-name" style="background-color: #F0F0F0;">';
+    		echo '<div class="inv-id" style="background-color: #F0F0F0;">';
     	        echo '<p style="font-size:medium;">';
     	            echo "<b>Item ID</b>";
     	        echo '</p>';
@@ -123,7 +123,7 @@
 	        switch ($i)
 	        {
 	            case 0:
-	                echo '<div class="inv-name" style="';
+	                echo '<div class="inv-id" style="';
 	                break;
 	            
 	            case 1:

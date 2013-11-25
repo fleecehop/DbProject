@@ -11,7 +11,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
-<<h2 class="div-padding">A & G Company</h2>
+<h2 class="div-padding">A & G Company</h2>
 <title>Manage Promotions</title>
 </head>
 <div class="div-padding">    
@@ -44,7 +44,7 @@
 		$_SESSION['promotions'] = true;
 		include 'displayInventory.php'; 
 	?>
-	<input type="submit" value="Update Promotions"><br><br>
+	<div style="float:right; margin-right:10px;"><input type="submit" value="Update Promotions"></div><br><br>
 </h1> 
 <br> <br> <br>
 </body>

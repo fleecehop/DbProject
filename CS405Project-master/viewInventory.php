@@ -37,7 +37,7 @@
 	<?php }
 	else {} ?>
 </div>
-<?php include "message.php"?>
+<?php //include "message.php"?>
 <h1 align="center"> 
 	<?php 
 		$_SESSION['view'] = true;

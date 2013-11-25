@@ -595,12 +595,17 @@ a.menu-option
 	margin-left: 25px;
 }
 
-.inv-name, .inv-description, .inv-type, .inv-amount, .inv-price, .inv-promo
+.inv-id, .inv-name, .inv-description, .inv-type, .inv-amount, .inv-price, .inv-promo
 {
 	position: relative;
 	float: left;
 	height: 25px;
 	text-align: center;
+}
+
+.inv-id
+{
+	width: 5%;
 }
 
 .inv-name
@@ -620,7 +625,7 @@ a.menu-option
 
 .inv-amount
 {
-	width: 10%;
+	width: 8%;
 }
 
 .inv-price
@@ -630,7 +635,7 @@ a.menu-option
 
 .inv-promo
 {
-	width: 10%;
+	width: 8%;
 }
 
 .header-line

@@ -38,8 +38,8 @@
 	else {} ?>
 </div>
 <body> 
-<br><br>
-		<div class="box">
+<br>
+		<div align="center" class="box">
 		<form method="POST" action="salesInfo.php"> 
 			Time Frame: <select name="time">
 			<option value="week">week</option>
@@ -50,11 +50,9 @@
 	<input type="submit" value="View Sales Statistics">
 	</form>
 	</div>
-	<br>
-<h3 align="center">
-<br>
+<div align="center">
 	<?php include 'showSalesInfo.php' ?>
-</h3>
+</div>
 </form> 
 </body>
 </html>

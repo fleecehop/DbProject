@@ -37,9 +37,9 @@
 </div>
 <body>
 	<?php include "message.php"?> 
-	<h1 align="center">
+	<div align="center">
 	<?php include 'showPendingOrders.php'; ?>
-	</h1>
+	</div>
 <br> <br> <br>
 </form> 
 </body>

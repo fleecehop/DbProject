@@ -36,30 +36,32 @@
 	<?php }
 	else {} ?>
 </div>
-<?php include "message.php"?>
+<?php //include "message.php"?>
+<br>
+
+<div class="order-line" align="center"><b>Add Item to Inventory</b></div><br>
+<div align="center">
+<form method="POST" action="addInventory.php"> 
+	Name: * <br><input type="text" name="name"><br><br>
+	Description: * <br><input type="text" name="description"><br><br>
+	Type: * <br><select name="type">
+			<option value="toy">Toy</option>
+			<option value = "game">Game</option>
+			</select><br><br>
+	Amount: <br><input type="text" name="amount"><br><br>
+	Price: <br><input type="text" name="price"><br><br>
+	<input type="submit" value="Add Item to Store">
+</form> 
+</div>
 
 <h1 align="center"> 
 <form method="POST" action="updateInventory.php"> 
 	<?php include 'displayInventory.php'; ?>
-	<input type="submit" value="Update">
+	<p style="float:right; margin-right:30px;"><input type="submit" value="Add Quantity"></p>
 </form><br>
 </h1>
-<br><br> 
+<br>
 
-<div align="center"><b>Add Item to Inventory</b></div>
-<div class="box">
-<form method="POST" action="addInventory.php"> 
-	Name*: <input type="text" name="name"><br>
-	Description*: <input type="text" name="description"><br>
-	Type*: <select name="type">
-			<option value="toy">toy</option>
-			<option value = "game">game</option>
-			</select><br>
-	Amount: <input type="text" name="amount"><br>
-	Price: <input type="text" name="price"><br>
-	<input type="submit" value="Add Item to Store">
-</form> 
-</div>
 </body>
 </html>
 
