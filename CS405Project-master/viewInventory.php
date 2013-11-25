@@ -27,9 +27,10 @@
 	    <a href="viewInventory.php" class="menu-option">View Inventory </a>
     	<a href="manageInventory.php" class="menu-option">Edit Inventory </a>
     	<a href="pendingOrders.php" class="menu-option">Pending Orders </a>
-    	
+    	<?php if (intval($_SESSION['privileges']) == 3) { ?>
 		<a href="managePromotions.php" class="menu-option">Promotions </a>
 		<a href="salesInfo.php" class="menu-option">Stats </a>
+		<?php } ?>
     	
 	</div>
 	
