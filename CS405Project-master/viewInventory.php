@@ -25,9 +25,11 @@
 	<div class="header-div" style="float:right;">
 	    <a href="logout.php" class="menu-option">Log Out </a>
 	    <a href="viewInventory.php" class="menu-option">View Inventory </a>
-    	<a href="manageInventory.php" class="menu-option">Manage Inventory </a>
+    	<a href="manageInventory.php" class="menu-option">Edit Inventory </a>
     	<a href="pendingOrders.php" class="menu-option">Pending Orders </a>
-    	<a href="salesInfo.php" class="menu-option">View Statistics </a>
+    	
+		<a href="managePromotions.php" class="menu-option">Promotions </a>
+		<a href="salesInfo.php" class="menu-option">Stats </a>
     	
 	</div>
 	
