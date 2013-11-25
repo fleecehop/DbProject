@@ -9,20 +9,30 @@
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style.css">
 <h2 class="div-padding">A & G Company</h2>
 <title>Manage Pending Orders</title>
 </head>
-<h4 align="right">	
-<link rel="stylesheet" type="text/css" href="style.css">
-Welcome <?php echo $_SESSION['username'];  ?>
-<a href="logout.php"> Log Out </a><br> 
-<a href="viewInventory.php">View Inventory</a><br>
-<a href="manageInventory.php">Manage Inventory</a><br>
-<?php if (intval($_SESSION['privileges']) > 2) { ?>
-<a href="managePromotions.php">Manage Promotions</a><br>
-<a href="salesInfo.php">View Sales Statistics</a><br>
-<?php } ?>
-</h4>
+<div class="div-padding">    
+    <div class="header-div" style="float:left; font-weight: bold;">
+	    Welcome <?php 
+    			if (isset($_SESSION['username'])) {
+    				echo $_SESSION['username']; 
+    				?>!
+	</div>
+	
+	<div class="header-div" style="float:right;">
+	    <a href="logout.php" class="menu-option">Log Out </a>
+	    <a href="viewInventory.php" class="menu-option">View Inventory </a>
+    	<a href="manageInventory.php" class="menu-option">Manage Inventory </a>
+    	<a href="pendingOrders.php" class="menu-option">Pending Orders </a>
+    	<a href="salesInfo.php" class="menu-option">View Statistics </a>
+    	
+	</div>
+	
+	<?php }
+	else {} ?>
+</div>
 <body>
 	<?php include "message.php"?> 
 	<h1 align="center">

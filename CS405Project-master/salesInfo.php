@@ -12,26 +12,29 @@
 <head>
 <h2 class="div-padding">A & G Company</h2>
 <link rel="stylesheet" type="text/css" href="style.css">
-<style>
-div.box
-{
-width:220px;
-padding:10px;
-border:5px solid gray;
-margin-left:auto;
-margin-right:auto;
-}
-</style>
+
 <title>Sales Statistics</title>
 </head>
-<h4 align="right">
-Welcome <?php echo $_SESSION['username'];  ?>
-<a href="logout.php"> Log Out</a><br> 
-<a href="viewInventory.php">View Inventory</a><br>
-<a href="manageInventory.php">Manage Inventory</a><br>
-<a href="pendingOrders.php">Manage Pending Orders</a><br>
-<a href="managePromotions.php">Manage Promotions</a><br>
-</h4>
+<div class="div-padding">    
+    <div class="header-div" style="float:left; font-weight: bold;">
+	    Welcome <?php 
+    			if (isset($_SESSION['username'])) {
+    				echo $_SESSION['username']; 
+    				?>!
+	</div>
+	
+	<div class="header-div" style="float:right;">
+	    <a href="logout.php" class="menu-option">Log Out </a>
+	    <a href="viewInventory.php" class="menu-option">View Inventory </a>
+    	<a href="manageInventory.php" class="menu-option">Manage Inventory </a>
+    	<a href="pendingOrders.php" class="menu-option">Pending Orders </a>
+    	<a href="salesInfo.php" class="menu-option">View Statistics </a>
+    	
+	</div>
+	
+	<?php }
+	else {} ?>
+</div>
 <body> 
 <br><br>
 		<div class="box">
