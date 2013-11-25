@@ -198,8 +198,10 @@ if (isset($_SESSION['privileges'])) {
                     echo "$";
                     $p1 = $row[$i];
                     $p2 = $row[$i-1];
-                    $p3 = $p1 * $p2;
-                    echo "$p3";
+                    $p3 = (100-$row[$i-2])/100;
+                    $p4 = $p1 * $p2 * $p3;
+                    $p5 = sprintf('%0.2f', $p4);
+                    echo "$p5";
                 }
                 else
                 {
