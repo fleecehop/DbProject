@@ -9,7 +9,7 @@
 
 <html>
 <head>
-<h2>The Store</h2>
+<h2 class="div-padding">A & G Company</h2>
 <title>Manage Pending Orders</title>
 </head>
 <h4 align="right">	
