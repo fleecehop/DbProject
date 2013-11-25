@@ -67,7 +67,7 @@ if (isset($_SESSION['privileges'])) {
 	return false;
 	}
 	
-	echo '<h2 align="center" style="padding:10px; background: #B8B8B8; margin:15px;"><b>Shopping Basket</b></h2>';
+	echo '<p align="center" class="header-line"><b>Shopping Basket</b></p>';
 	
 	/*
 	echo "<table align=\"center\" border = 2 bgcolor=\"#F0F0F0\"><tr>";

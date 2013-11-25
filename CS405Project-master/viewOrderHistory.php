@@ -39,11 +39,11 @@
 </div>
 <body>
 <?php //include "message.php"?>
-<h3 align="center"> 
+<div align="center"> 
 	<?php 
 		include 'showCustomerOrders.php'; 
 	?>
-	</h3>
+	</div>
 <br> <br> <br>
 </body>
 </html>
