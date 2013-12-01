@@ -2,7 +2,7 @@
 
 	session_start();
 	
-	header("Location: store.php");
+	header("Location: customerInventory.php");
 	
 	// connect to database
 	$mysqli = new mysqli("mysql.cs.uky.edu", "clef222", "Mtfbwy4;", "clef222");
@@ -10,7 +10,7 @@
 	// check connection 
 	if (mysqli_connect_errno()) 
 	{
-		printf("Connect failed: %s\n", mysqli_connect_error());
+		printf("Failed to Connect: %s\n", mysqli_connect_error());
 		return false;
 	}
 	

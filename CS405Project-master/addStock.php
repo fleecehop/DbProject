@@ -8,7 +8,7 @@
 	} 
 	else if (intval($_SESSION['privileges']) < 2) 
 	{
-		header("Location: store.php");
+		header("Location: customerInventory.php");
 	} 
 	else 
 	{
@@ -18,7 +18,7 @@
 	
     	if (mysqli_connect_errno()) 
     	{
-    		printf("Failed to connect: %s\n", mysqli_connect_error());
+    		printf("Failed to Connect: %s\n", mysqli_connect_error());
     		
     		return false;
     	}
