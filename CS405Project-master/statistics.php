@@ -1,11 +1,11 @@
 <?php 
+
 	session_start();
 	
-	if (!isset($_SESSION['privileges'])) 
-	{
+	if (!isset($_SESSION['privileges'])) {
 		header("Location: index.php");
-	} 
-	else if (intval($_SESSION['privileges']) < 2) 
+	}
+	else if (intval($_SESSION['privileges']) < 3) 
 	{
 		header("Location: customerInventory.php");
 	} 
@@ -15,13 +15,12 @@
 
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="style.css">
         <h2 class="div-padding">A & G Company</h2>
-        <title>Manage Pending Orders</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Sales Statistics</title>
     </head>
     
-    <div class="div-padding"> 
-           
+    <div class="div-padding">    
         <div class="header-div" style="float:left; font-weight: bold;">
     	    Welcome <?php 
         			if (isset($_SESSION['username'])) {
@@ -39,19 +38,30 @@
     		    <a href="managePromotions.php" class="menu-option">Promotions </a>
         		<a href="statistics.php" class="menu-option">Stats </a>
         	<?php } ?>
+        	
     	</div>
 	
     	<?php } ?>
-    	
     </div>
     
-    <body>
-    	<?php include "message.php"?> 
-    	<div align="center">
-    	    <?php include 'showPendingOrders.php'; ?>
-    	</div>
-    <br> <br> <br>
-    
+    <body> 
+        <br>
+    		<div align="center" class="box">
+    		    <form method="POST" action="statistics.php"> 
+        			Time Frame: <select name="time">
+        			    <option value="week">week</option>
+            			<option value="month">month</option>
+            			<option value="year">year</option>
+            			<option value="all">all</option>
+        		    </select><br><br>
+                	<input type="submit" value="View Sales Statistics">
+            	</form>
+        	</div>
+        	
+        <div align="center">
+        	<?php include 'showStatistics.php' ?>
+        </div>
+        
     </body>
     
 </html>

@@ -30,19 +30,23 @@ body {
     background-color: #FFBABA;
 }
 
-h1, h2, h3 {
+h1, h2, h3, .inv-box {
 	margin: 0;
 	padding: 0;
 	text-transform: uppercase;
 	font-weight: 300;
 }
 
-h1 {
-	font-size: 2em;
+h1, .inv-box {
 	background: #D8D8D8 ;
 	color: #7D7764;
 	margin:15px;
 	padding-right:25px;
+}
+
+h1
+{
+	font-size: 2em;
 }
 
 h2 {
@@ -618,12 +622,7 @@ a.menu-option
 	width: 30%;
 }
 
-.inv-type
-{
-	width: 10%;
-}
-
-.inv-amount
+.inv-amount, .inv-promo, .inv-type
 {
 	width: 8%;
 }
@@ -633,9 +632,13 @@ a.menu-option
 	width: 10%;
 }
 
-.inv-promo
+div.box
 {
-	width: 8%;
+	width:220px;
+	padding:10px;
+	border:5px solid gray;
+	margin-left:auto;
+	margin-right:auto;
 }
 
 .header-line

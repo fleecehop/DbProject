@@ -3,7 +3,6 @@
     session_start();
     session_unset();
     session_destroy();
-    // Logged out, return home.
-    Header("Location: loginForm.php");
+    Header("Location: index.php");
 	
  ?>	

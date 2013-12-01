@@ -1,214 +1,202 @@
 <?php 
-	if (!isset($_SESSION['privileges'])) {
-		header("Location: loginForm.php");
-	} else if (intval($_SESSION['privileges']) < 2) {
-		header("Location: store.php");
-	} else {
-	// connect to database
-	$mysqli = new mysqli("mysql.cs.uky.edu", "clef222", "Mtfbwy4;", "clef222");
-	
-	// check connection 
-	if (mysqli_connect_errno()) {
-		printf("Connect failed: %s\n", mysqli_connect_error());
-		$_SESSION['error'] = $_SESSION['error']."Database Error: Unable to connect to the mySQL Database.<br>"; 
-		return false;
-	}
-	
-	
-    $query = "SELECT orderNum, total FROM Orders WHERE shipStatus = 'false'";
-	$result = $mysqli->query($query); // Execute the Query
-	
-	
-	echo '<div align="center" class="div-orders">';
-	
-	echo '<p class="order-line">Pending Orders</p><br>';
-	while ($row = $result->fetch_array()) 
-	{  
-		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0]&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspTotal: $$row[1]</p>";
-		
-		
-		echo "   <form method=\"POST\" action=\"shipOrder.php\">
-				<input type=\"hidden\" name=\"orderNum\" value=\"$row[0]\">";
-		$query = "SELECT u.id FROM Users u, CustomerPlacesOrder c WHERE c.orderNum ='$row[0]' AND c.cId = u.id";
-		$custResult = $mysqli->query($query);
-		$customer = $custResult->fetch_array();
-		echo "Customer ID: $customer[0]";
-		
-		echo "<br><br>";
-		
-		echo '<div align="center" class="div-inventory" style="margin-left:23%;">';
 
-            echo '<div class="inv-id" style="background-color: #F0F0F0;">';
-    	        echo '<p style="font-size:medium; text-transform: uppercase;">';
-    	            echo "<b>Item ID</b>";
-    	        echo '</p>';
-    	    echo '</div>';
-
-    	    echo '<div class="inv-name" style="background-color: #F0F0F0;">';
-    	        echo '<p style="font-size:medium; text-transform: uppercase;">';
-    	            echo "<b>Name</b>";
-    	        echo '</p>';
-    	    echo '</div>';
-
-            echo '<div class="inv-amount" style="background-color: #F0F0F0;">';
-    	        echo '<p style="font-size:medium; text-transform: uppercase;">';
-    	            echo "<b>In Stock</b>";
-    	        echo '</p>';
-    	    echo '</div>';
-    	    
-    	    echo '<div class="inv-amount" style="background-color: #F0F0F0;">';
-    	        echo '<p style="font-size:medium; text-transform: uppercase;">';
-    	            echo "<b>Quantity</b>";
-    	        echo '</p>';
-    	    echo '</div>';
-
-            echo '<div class="inv-price" style="background-color: #F0F0F0;">';
-    	        echo '<p style="font-size:medium; text-transform: uppercase;">';
-    	            echo "<b>Price</b>";
-    	        echo '</p>';
-    	    echo '</div>';
-
-    	    echo '<div class="inv-promo" style="background-color: #F0F0F0;">';
-    	        echo '<p style="font-size:medium; text-transform: uppercase;">';
-    	            echo "<b>Promotion</b>";
-    	        echo '</p>';
-    	    echo '</div>';
-
-    	echo '</div>';
+	if (!isset($_SESSION['privileges'])) 
+	{
+		header("Location: index.php");
+	} 
+	else if (intval($_SESSION['privileges']) < 2) 
+	{
+		header("Location: customerInventory.php");
+	} 
+	else 
+	{
+	    
+	    // connect to database
+    	$mysqli = new mysqli("mysql.cs.uky.edu", "clef222", "Mtfbwy4;", "clef222");
 	
+    	// check connection 
+    	if (mysqli_connect_errno()) 
+    	{
+    		printf("Failed to Connect: %s\n", mysqli_connect_error());
+    		
+    		return false;
+    	}
 	
-    	$query = "SELECT i.itemId, i.name, i.quantity, oc.amount, i.price, i.promotion FROM 
-					Inventory i, OrderContainsItem oc WHERE orderNum = '$row[0]' AND oc.itemId = i.itemId";
-		$orderItems = $mysqli->query($query);
+    	$r = $mysqli->query("SELECT orderNum, total FROM Orders WHERE shipStatus = 'false'");
+	
+    	echo '<div align="center" class="div-orders">';
+	
+    	echo '<p class="order-line">Pending Orders</p><br>';
     	
-    	$count = 0;
+    	while ($row = $r->fetch_array()) 
+    	{  
+    		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total: $$row[1]</p>";
+		
+    		echo "<form method=\"POST\" action=\"shipOrder.php\">
+                    <input type=\"hidden\" name=\"orderNum\" value=\"$row[0]\">";
+                    
+    		$query = "SELECT u.id FROM Users u, CustomerPlacesOrder c WHERE c.orderNum ='$row[0]' AND c.cId = u.id";
+    		
+    		$cr = $mysqli->query("SELECT u.id FROM Users u, CustomerPlacesOrder c WHERE
+    		     c.orderNum ='$row[0]' AND c.cId = u.id");
+    		
+    		$cust = $cr->fetch_array();
+    		
+    		echo "Customer ID: $cust[0]";
+		
+    		echo "<br><br>";
+		
+    		echo '<div align="center" class="div-inventory" style="margin-left:23%;">';
 
-    	while ($r = $orderItems->fetch_array()) 
-    	{   
-    	    echo '<div class="div-inventory" style="margin-left:23%;">';
+                echo '<div class="inv-id" style="background-color: #F0F0F0;">';
+        	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+        	            echo "<b>Item ID</b>";
+        	        echo '</p>';
+        	    echo '</div>';
 
-    	    for ($i = 0; $i < $mysqli->field_count; $i++) 
-    	    {
-    	        $field = 1;
+        	    echo '<div class="inv-name" style="background-color: #F0F0F0;">';
+        	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+        	            echo "<b>Name</b>";
+        	        echo '</p>';
+        	    echo '</div>';
 
-    	        switch ($i)
-    	        {
-    	            case 0:
-    	                echo '<div class="inv-id" style="';
-    	                break;
-    	            
-    	            case 1:
-    	                echo '<div class="inv-name" style="';
-    	                break;
+                echo '<div class="inv-amount" style="background-color: #F0F0F0;">';
+        	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+        	            echo "<b>In Stock</b>";
+        	        echo '</p>';
+        	    echo '</div>';
+    	    
+        	    echo '<div class="inv-amount" style="background-color: #F0F0F0;">';
+        	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+        	            echo "<b>Quantity</b>";
+        	        echo '</p>';
+        	    echo '</div>';
 
-    	            case 2:
-    	                echo '<div class="inv-amount" style="';
-    	                break;
-    	                
-    	            case 3:
-    	                echo '<div class="inv-amount" style="';
-    	                break;
-    	                
-    	            case 4:
-	                    echo '<div class="inv-price" style="';
-	                    break;
+                echo '<div class="inv-price" style="background-color: #F0F0F0;">';
+        	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+        	            echo "<b>Price</b>";
+        	        echo '</p>';
+        	    echo '</div>';
 
-    	            case 5:
-    	                echo '<div class="inv-promo" style="';
-    	                break;
+        	    echo '<div class="inv-promo" style="background-color: #F0F0F0;">';
+        	        echo '<p style="font-size:medium; text-transform: uppercase;">';
+        	            echo "<b>Promotion</b>";
+        	        echo '</p>';
+        	    echo '</div>';
 
-    	            default:
-    	                $field = 0;
-                }
-                
-                if ($field == 1)
+        	echo '</div>';
+        	
+    		$items = $mysqli->query("SELECT i.itemId, i.name, i.quantity, oc.amount, i.price,
+    		    i.promotion FROM Inventory i, OrderContainsItem oc WHERE orderNum = '$row[0]'
+    		    AND oc.itemId = i.itemId");
+    	
+        	$count = 0;
+    	
+        	$ship = true;
+
+        	while ($r2 = $items->fetch_array()) 
+        	{   
+        	    echo '<div class="div-inventory" style="margin-left:23%;">';
+
+                if ($r2[2] < $r2[3])
                 {
-                    if ($count % 2 == 0)
-            	    {
-                	    echo 'background-color: white;">';   
-            	    }
-            	    else
-            	    {
-            	        echo 'background-color: #F0F0F0;">';
-            	    }
+                    $ship = false;
+                }
 
-                    echo '<p style="font-size:medium;">';
-                    if ($i == 4)
-                    {
-                        echo "$";
-                        $p1 = $r[$i];
-                        $p2 = $r[$i-1];
-                        $p3 = (100-$r[$i+1])/100;
-                        $p4 = $p1 * $p2 * $p3;
-                        $p5 = sprintf('%0.2f', $p4);
-                        echo "$p5";
+        	    for ($i = 0; $i < $mysqli->field_count; $i++) 
+        	    {
+        	        $field = 1;
+
+        	        switch ($i)
+        	        {
+        	            case 0:
+        	                echo '<div class="inv-id" style="';
+        	                break;
+    	            
+        	            case 1:
+        	                echo '<div class="inv-name" style="';
+        	                break;
+
+        	            case 2:
+        	                echo '<div class="inv-amount" style="';
+        	                break;
+    	                
+        	            case 3:
+        	                echo '<div class="inv-amount" style="';
+        	                break;
+    	                
+        	            case 4:
+    	                    echo '<div class="inv-price" style="';
+    	                    break;
+
+        	            case 5:
+        	                echo '<div class="inv-promo" style="';
+        	                break;
+
+        	            default:
+        	                $field = 0;
                     }
-                    else
+                
+                    if ($field == 1)
                     {
-        			    echo "$r[$i]";
-    			    }
-        			if ($i == 5){echo "% off";}
-        			echo "</p>";
-        			echo '</div>';
-    		    }
-    		    else
-    		    {
-    		        
-    		    }
+                        if ($count % 2 == 0)
+                	    {
+                    	    echo 'background-color: white;">';   
+                	    }
+                	    else
+                	    {
+                	        echo 'background-color: #F0F0F0;">';
+                	    }
+
+                        echo '<p style="font-size:medium;">';
+                        if ($i == 4)
+                        {
+                            echo "$";
+                            $p1 = $r2[$i];
+                            $p2 = $r2[$i-1];
+                            $p3 = (100-$r2[$i+1])/100;
+                            $p4 = $p1 * $p2 * $p3;
+                            $p5 = sprintf('%0.2f', $p4);
+                            echo "$p5";
+                        }
+                        else
+                        {
+            			    echo "$r2[$i]";
+        			    }
+            			if ($i == 5){echo "% off";}
+            			echo "</p>";
+            			echo '</div>';
+        		    }
     		    
-    		}
+        		}
 
-    		$count++;
+        		$count++;
 
-    		echo '</div>';
+        		echo '</div>';
+        	}
+    	
+        	echo "<br>";
+    	
+        	if ($ship)
+        	{
+        	    echo "<div style=\"margin-right:0px;\"><input type=\"submit\" value=\"Ship Order\"></div></form><br>";
+    	    }
+	
+    	    echo "<br>";
+    	    
     	}
     	
-    	echo "<br>";
-    	
-    	echo "<div style=\"margin-right:0px;\"><input type=\"submit\" value=\"Ship Order\"></div></form><br>";
-    	
-	    echo "<br>";
-	}
-	echo "</div>";
+    	echo "</div>";
 	
+    	if ($r) 
+    	{
+    		$r->close();
+    	}
 	
-	/*
-	echo "<br><br><b>Pending Orders</b><br><br>";
-	while ($row = $result->fetch_array()) {
-		echo "Order Number: $row[0]    Total: $row[1]";
-		echo "   <form method=\"POST\" action=\"shipOrder.php\">
-				<input type=\"hidden\" name=\"orderNum\" value=\"$row[0]\">";
-		$query = "SELECT u.id FROM Users u, CustomerPlacesOrder c WHERE c.orderNum ='$row[0]' AND c.cId = u.id";
-		$custResult = $mysqli->query($query);
-		$customer = $custResult->fetch_array();
-		echo "Customer ID: $customer[0]"; 
-		
-		echo "<table align=\"center\" border = 2 bgcolor=\"#F0F0F0\"><tr>";
-		echo "<td>ID</td><td>Name</td><td>Amount In Stock</td><td>Order Amount</td><td>Price</td><td>Promotion</td></tr>";
-		$query = "SELECT i.itemId, i.name, i.quantity, oc.amount, i.price, i.promotion FROM 
-					Inventory i, OrderContainsItem oc WHERE orderNum = '$row[0]' AND oc.itemId = i.itemId";
-		$orderItems = $mysqli->query($query);
-		while ($r = $orderItems->fetch_array()) {
-			echo "<tr>"; 
-			for ($i = 0; $i < $mysqli->field_count; $i++) {
-				echo "<td>$r[$i]</td>";
-			}
-			echo "</tr>";
-		}
-		if ($r) {
-			$r->close();
-		}
-		echo "</table>";
-		echo "<input type=\"submit\" value=\"Ship Order\"></form><br>"; 
-	}
-	*/
-	if ($result) {
-		$result->close();
-	}
-	
-	// close the connection
-	if ($mysqli) {
-		$mysqli->close();
-	}
+    	// close the connection
+    	if ($mysqli) 
+    	{
+    		$mysqli->close();
+    	}
 	}
 ?>
