@@ -87,7 +87,7 @@
         	echo '</div>';
         	
     		$items = $mysqli->query("SELECT i.itemNumber, i.name, i.quantity, oc.amount, i.price,
-    		    i.promotion FROM Item i, OrderContainsItem oc WHERE orderID = '$row[0]'
+    		    i.promotion FROM Item i, Contains oc WHERE orderID = '$row[0]'
     		    AND oc.itemNumber = i.itemNumber");
     	
         	$count = 0;

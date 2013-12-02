@@ -65,7 +65,7 @@
         	echo '</div>';
         	
     		$items = $mysqli->query("SELECT i.name, oc.amount, i.price, i.promotion FROM 
-                Item i, OrderContainsItem oc WHERE orderID = '$row[0]' AND oc.itemNumber =
+                Item i, Contains oc WHERE orderID = '$row[0]' AND oc.itemNumber =
                 i.itemNumber");
     	
         	$count = 0;
@@ -183,7 +183,7 @@
         	echo '</div>';
 	
     		$items = $mysqli->query("SELECT i.name, oc.amount, i.price, i.promotion FROM 
-    		    Item i, OrderContainsItem oc WHERE orderID = '$row[0]' AND oc.itemNumber =
+    		    Item i, Contains oc WHERE orderID = '$row[0]' AND oc.itemNumber =
     		    i.itemNumber");
     	
         	$count = 0;

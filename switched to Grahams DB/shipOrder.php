@@ -25,7 +25,7 @@
     	}
     	
     	$r = $mysqli->query("SELECT i.itemNumber FROM Item i, Orders o,
-    	     OrderContainsItem oc WHERE o.orderID = '$_POST[orderID]' AND oc.orderID =
+    	     Contains oc WHERE o.orderID = '$_POST[orderID]' AND oc.orderID =
     	     '$_POST[orderID]' AND i.itemNumber = oc.itemNumber AND i.quantity < oc.amount");
     	     
     	if ($r->num_rows > 0) {
@@ -40,7 +40,7 @@
     	} 
     	else 
     	{
-    		$result = $mysqli->query("SELECT itemNumber, amount FROM OrderContainsItem WHERE
+    		$result = $mysqli->query("SELECT itemNumber, amount FROM Contains WHERE
     		     orderID = '$_POST[orderID]'");
     		
     		while ($row = $result->fetch_array()) 

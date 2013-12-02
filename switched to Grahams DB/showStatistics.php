@@ -124,7 +124,7 @@
     		echo '<div align="center" class="div-inventory" style="margin-left:35%;">';
 		
     		$items = $mysqli->query("SELECT i.itemNumber, i.name, oc.amount FROM Item i,
-    		     OrderContainsItem oc WHERE orderID = '$row[0]' AND oc.itemNumber = i.itemNumber");
+    		     Contains oc WHERE orderID = '$row[0]' AND oc.itemNumber = i.itemNumber");
 		
     		$count = 0;
 		

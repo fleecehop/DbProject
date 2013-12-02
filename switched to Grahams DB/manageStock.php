@@ -52,10 +52,10 @@
         
         <div align="center">
             <form method="POST" action="addStock.php"> 
-            	Name: * <br><input type="text" name="name"><br><br>
-            	Description: * <br><input type="text" name="description"><br><br>
-            	Type: * <br><select name="type">
-            			<option value="toy">Toy</option>
+            	Name: <br><input type="text" name="name"><br><br>
+            	Description: <br><input type="text" name="description"><br><br>
+            	Type: <br><select name="type">
+            			<option value="electronic">Electronic</option>
             			<option value = "game">Game</option>
             			</select><br><br>
             	Amount: <br><input type="text" name="amount"><br><br>

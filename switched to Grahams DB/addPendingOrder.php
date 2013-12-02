@@ -49,7 +49,7 @@
     	    
     	while($row = $r->fetch_array())
     	{
-        	$i = $mysqli->query("INSERT INTO OrderContainsItem VALUES
+        	$i = $mysqli->query("INSERT INTO Contains VALUES
         	     ('$id','$row[0]','$row[1]')");
     	}
 	

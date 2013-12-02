@@ -6,8 +6,9 @@
 //we use uID, they use User.id and cID
 //contains has a different amount, amount should be changed manually
 
-
-//CANNOT BATCH name>>itemName, id>>uID, description?,promotion?
+//fix address
+//CANNOT BATCH name>>itemName, id>>uID, description>>itemDescription?,promotion?, amount, cID,
+ 
 **************************to change
 --Users
 id	 --uID
