@@ -1,14 +1,6 @@
 <?php 
 
-	if (!isset($_SESSION['privilege'])) 
-	{
-		header("Location: index.php");
-	} 
-	else if (intval($_SESSION['privilege']) < 3) 
-	{
-		header("Location: customerInventory.php");
-	}
-	else if (!isset($_POST['time'])) 
+	if (!isset($_POST['time'])) 
 	{
 		// do nothing
 	} 

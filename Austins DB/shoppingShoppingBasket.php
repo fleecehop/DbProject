@@ -6,7 +6,7 @@
     {
     	if (intval($_SESSION['privilege']) > 1) 
     	{
-    		header("Location: inventory.php");
+    		header("Location: viewInventory.php");
     	}
 	} 
 	else 
@@ -55,8 +55,6 @@
     		printf("Failed to Connect: %s\n", mysqli_connect_error());
     		return false;
     	}
-
-
 
     	// set up DB Query and execute it
     	$r = $mysqli->query("SELECT I.itemNumber, I.name, I.description, I.promotion, B.amount, 

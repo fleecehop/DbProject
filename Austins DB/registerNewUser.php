@@ -5,13 +5,15 @@
     {
     	if (intval($_SESSION['privilege']) > 1) 
     	{
-    		header("Location: inventory.php");
+    		header("Location: viewInventory.php");
     	} 
     	else 
     	{
     		header("Location: customerInventory.php");
     	}
-    } else {
+    } 
+    else 
+    {
 ?>
 <html>
     <head>

@@ -48,11 +48,6 @@
 		}
 	}
 	
-	if ($result) 
-	{
-		$result->close();
-	}
-	
 	// close the connection
 	if ($mysqli) 
 	{
