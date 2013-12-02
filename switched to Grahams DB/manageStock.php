@@ -17,7 +17,7 @@
     <head>
         <link rel="stylesheet" type="text/css" href="style.css">
         <h2 class="div-padding">A & G Company</h2>
-        <title>Manage Item</title>
+        <title>Manage Inventory</title>
     </head>
     <body>
         <div class="div-padding">    
@@ -31,8 +31,8 @@
 	
         	<div class="header-div" style="float:right;">
         	    <a href="logout.php" class="menu-option">Log Out </a>
-        	    <a href="viewInventory.php" class="menu-option">View Item </a>
-            	<a href="manageStock.php" class="menu-option">Edit Item </a>
+        	    <a href="viewInventory.php" class="menu-option">View Inventory </a>
+            	<a href="manageStock.php" class="menu-option">Edit Inventory </a>
             	<a href="pendingOrders.php" class="menu-option">Pending Orders </a>
             	
             	<?php if (intval($_SESSION['privilege']) == 3) { ?>
@@ -48,14 +48,14 @@
         <?php include "message.php"?>
         <br>
 
-        <div class="order-line" align="center"><b>Add Item to Item</b></div><br>
+        <div class="order-line" align="center"><b>Add Item to Inventory</b></div><br>
         
         <div align="center">
             <form method="POST" action="addStock.php"> 
             	Name: <br><input type="text" name="name"><br><br>
             	Description: <br><input type="text" name="description"><br><br>
             	Type: <br><select name="type">
-            			<option value="electronic">Electronic</option>
+            			<option value = "toy">Toy</option>
             			<option value = "game">Game</option>
             			</select><br><br>
             	Amount: <br><input type="text" name="amount"><br><br>

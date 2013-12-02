@@ -25,7 +25,7 @@
 			{
 				$inc = intval($_POST[$item[0]]);
 				
-				$result = $mysqli->query("UPDATE Item SET quantity=quantity+'$inc'
+				$result = $mysqli->query("UPDATE Item SET amount = amount + '$inc'
 				    WHERE itemNumber = '$item[0]'");
 			}
 		}

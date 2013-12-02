@@ -130,8 +130,16 @@
             
                     //echo '<div class="inv-name">';
                     echo '<p style="font-size:medium;">';
-                    if ($i == 5){echo "$";}
-        			echo "$row[$i]";
+                    if ($i == 5)
+                    {
+                        $temp = sprintf('%0.2f', $row[$i]);
+                        
+                        echo "$$temp";
+                    }
+                    else
+                    {
+        			    echo "$row[$i]";
+    			    }
         			if ($i == 6){echo "% off";}
         			echo "</p>";
         			echo '</div>';

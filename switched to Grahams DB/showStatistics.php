@@ -28,47 +28,38 @@
     	echo '<p align="center" class="header-line"><b>Sales Statistics</b></p>';
 	
     	$query = "SELECT count(orderID), sum(total) FROM Orders";
+    	$query2 = "SELECT orderID, dateShipped, total FROM Orders";
     	
     	if ($_POST['time'] == "week") 
     	{
     		$query = $query." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 WEEK)";
+    		$query2 = $query2." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 WEEK)";
     	} 
     	else if ($_POST['time'] == "month") 
     	{
     		$query = $query." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
+    		$query2 = $query2." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
     	} 
     	else if ($_POST['time'] == "month") 
     	{
     		$query = $query." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+    		$query2 = $query2." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
     	}
     	
     	$r = $mysqli->query($query);
     	
     	if ($r) 
-    	{
+    	{   
     		$row = $r->fetch_array();
+    		
+    		$temp = sprintf('%0.2f', $row[1]);
+    		
     		echo '<div style="font-size:1.5em;>"';
-    		echo "<br>Number of Orders: $row[0] <br><br> Total Sales: $$row[1]<br><br>";
+    		echo "<br>Number of Orders: $row[0] <br><br> Total Sales: $$temp<br><br>";
     		echo "</div>";
     		$r->close();
     	}
-	
-    	// set up DB Query and execute it
-    	$query = "SELECT orderID, dateShipped, total FROM Orders";
-	
-    	if ($_POST['time'] == "week") 
-    	{
-    		$query = $query." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 WEEK)";
-    	} 
-    	else if ($_POST['time'] == "month") 
-    	{
-    		$query = $query." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 MONTH)";
-    	} 
-    	else if ($_POST['time'] == "year") 
-    	{
-    		$query = $query." WHERE dateShipped > DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";	
-    	}
-	
+
     	if ($_POST['time'] == "all")
     	{
     	    echo "<p class=\"order-line\" style=\"margin: 0px 30px 0px 30px;\">All Orders</p>";
@@ -78,7 +69,7 @@
     	    echo "<p class=\"order-line\" style=\"margin: 0px 30px 0px 30px;\">Orders for the past $_POST[time]</p>";
         }
 	
-    	$r = $mysqli->query($query);
+    	$r = $mysqli->query($query2);
 	
     	echo '<div align="center" class="div-orders">';
 	
@@ -88,7 +79,9 @@
 	    
     	    echo '<div style="font-size:1em;"><br>';
     	    
-    		    echo "Order #: $row[0]<br>Ship Date: $row[1]<br>Total: $$row[2]<br>";
+    	        $temp = sprintf('%0.2f', $row[2]);
+    	    
+    		    echo "Order #: $row[0]<br>Ship Date: $row[1]<br>Total: $$temp<br>";
     	
         		$cr = $mysqli->query("SELECT u.id FROM Users u, Places c
         		     WHERE c.orderID ='$row[0]' AND c.cId = u.id");

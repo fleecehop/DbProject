@@ -30,7 +30,9 @@
     	
     	while ($row = $r->fetch_array()) 
     	{  
-    		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total: $$row[1]</p>";
+    	    $temp = sprintf('%0.2f', $row[1]);
+    	    
+    		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total: $$temp</p>";
 		
     		echo "<form method=\"POST\" action=\"shipOrder.php\">
                     <input type=\"hidden\" name=\"orderID\" value=\"$row[0]\">";
@@ -86,9 +88,10 @@
 
         	echo '</div>';
         	
-    		$items = $mysqli->query("SELECT i.itemNumber, i.name, i.quantity, oc.amount, i.price,
-    		    i.promotion FROM Item i, Contains oc WHERE orderID = '$row[0]'
-    		    AND oc.itemNumber = i.itemNumber");
+        	
+    		$items = $mysqli->query("SELECT i.itemNumber, i.name, i.amount, oc.amount,
+    		     i.price, i.promotion FROM Item i, Contains oc WHERE orderID = '$row[0]' AND
+    		     oc.itemNumber = i.itemNumber");
     	
         	$count = 0;
     	

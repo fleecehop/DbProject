@@ -34,7 +34,10 @@
     	
     	while ($row = $r->fetch_array()) 
     	{  
-    		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total: $$row[1]</p>";
+    	    
+            $temp = sprintf('%0.2f', $row[1]);
+    	    
+    		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total: $$temp</p>";
 		
     		echo '<div align="center" class="div-inventory" style="margin-left:27%;">';
 
@@ -152,7 +155,9 @@
     	
     	while ($row = $r->fetch_array()) 
     	{  
-    		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total: $$row[1] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Ship Date: $row[2]</p>";
+    	    $temp = sprintf('%0.2f', $row[1]);
+    	    
+    		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total: $$temp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Ship Date: $row[2]</p>";
 		
     		echo '<div align="center" class="div-inventory" style="margin-left:27%;">';
 

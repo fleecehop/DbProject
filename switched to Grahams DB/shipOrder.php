@@ -26,7 +26,7 @@
     	
     	$r = $mysqli->query("SELECT i.itemNumber FROM Item i, Orders o,
     	     Contains oc WHERE o.orderID = '$_POST[orderID]' AND oc.orderID =
-    	     '$_POST[orderID]' AND i.itemNumber = oc.itemNumber AND i.quantity < oc.amount");
+    	     '$_POST[orderID]' AND i.itemNumber = oc.itemNumber AND i.amount < oc.amount");
     	     
     	if ($r->num_rows > 0) {
     		$_SESSION['error'] = $_SESSION['error']."Error: There are not enough items in stock for the following:<br>"; 
@@ -45,7 +45,7 @@
     		
     		while ($row = $result->fetch_array()) 
     		{
-    			if (($update = $mysqli->query("UPDATE Item SET quantity = quantity - 
+    			if (($update = $mysqli->query("UPDATE Item SET amount = amount - 
     			    '$row[1]' WHERE itemNumber = '$row[0]'")) != 1) 
     			{
     				$_SESSION['error'] = $_SESSION['error']."Error: Item ID $row[0] was not updated.<br>";
