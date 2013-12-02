@@ -38,7 +38,7 @@
         </div>
         
         <h4 align="center">
-            <a align="center" href="registerNewUser.php">Sign Up</a>
+            <a align="center" href="registerNewUser.php">New User? Sign Up</a>
         </h4>
 
     </body>

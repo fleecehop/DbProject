@@ -28,6 +28,12 @@
             
             return false;
         }
+        else if(empty($_POST['firstName']))
+        {
+            $_SESSION['error'] = $_SESSION['error']."Please input a First Name.<br>";
+            
+            return false;
+        }
 	
     	// connect to DB
     	$mysqli = new mysqli("mysql.cs.uky.edu", "mage223", "u0688279", "mage223");
