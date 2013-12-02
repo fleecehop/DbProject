@@ -30,16 +30,18 @@
 				} 
 				else 
 				{
+				    $ID = $item[0];
+				    
 					$result = $mysqli->query("UPDATE Inventory SET promotion='$inc' WHERE
-					    itemId = '$item[0]'");
+					    itemId = $ID");
 					    
 					if ($result != 1) 
 					{
-						$_SESSION['error'] = $_SESSION['error']."Error: Promotion was not updated for ItemID: $item[0]<br>"; 
+						$_SESSION['error'] = $_SESSION['error']."Promotion rate was not updated for Item ID: $ID<br>"; 
 					} 
 					else 
 					{
-						$_SESSION['message'] = $_SESSION['message']."Success: Promotion was updated for ItemID: $item[0]<br>"; 
+						$_SESSION['message'] = $_SESSION['message']."Promotion rate was updated for Item ID: $ID<br>"; 
 					}
 				}
 			
