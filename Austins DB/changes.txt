@@ -1,0 +1,137 @@
+--general changes
+//clef222 changes to mage223
+//Mtfbwy4; changes to u0688279
+
+//address,city,state,zip >> address problems
+//we use uID, they use User.id and cID
+//contains has a different amount, amount should be changed manually
+
+//fix address
+//CANNOT BATCH name>>itemName, id>>uID, description>>itemDescription?,promotion?, amount, cID,
+ 
+**************************to change
+--Users
+id	 --uID
+fname--firstName
+lname--lastName
+street,city,state,zip--address
+privileges--privilege 
+
+--Inventory>>Item
+itemId >>itemNumber
+name   >>itemName
+description>>itemDescription
+quantity >>amount
+promotion>>promotionRate
+
+--Orders
+orderNum>>orderID
+shipStatus>>status
+shipDate>>dateShipped
+
+--CustomerPlacesOrder>>Places
+cID>>uID
+orderNum>>orderID
+
+--ShoppingBasket>>Basket
+cID>>uID
+itemId>>itemNumber
+amount>>orderAmount
+
+--Contains
+orderNum>>orderID
+itemId>>itemNumber
+amount>>orderAmount
+
+
+
+
+
+
+
+************Our DB SETUP
+
+--Item
+itemNumber     --string
+itemName       --string
+itemDescription--string
+type           --string
+amount         --int
+price          --double
+promotionRate  --int
+
+--Users
+uID      --string
+password --string
+firstName--string
+lastName --string
+address  --string
+privilege--int
+
+--Orders
+orderID    --int
+status     --tinyint(1)
+dateShipped--string
+total      --double
+
+--Basket
+uId--string
+itemNumber --string
+orderAmount--int
+
+--Contains
+orderID    --int
+itemNumber --string
+orderAmount--int
+
+--Places
+uID    --string
+orderID--int
+
+**************Their DB setup
+CustomerPlacesOrder
+Inventory
+OrderContainsItem
+Orders
+ShoppingBasket
+Users
+
+--CustomerPlacesOrder
+cID     --varchar(30)
+orderNum--int
+
+--Inventory
+itemID   --int
+name     --varchar
+description--varchar
+type     --varchar
+quantity --int
+price    --decimal
+promotion--int
+
+--OrderContainsItem
+orderNum--int
+itemId--int
+amount--int
+
+--Orders
+orderNum --int
+shipStatus--tinyint
+shipDate--datetime
+total   --decimal
+
+--ShoppingBasket
+cID   --varchar
+itemId--int
+amount--int
+
+--Users
+id	      --varchar
+password  --varchar
+fname     --varchar
+lname     --varchar
+street    --varchar
+city      --varchar
+state     --varchar
+zip       --int
+privileges--int
