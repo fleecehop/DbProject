@@ -1,29 +1,25 @@
 <?php 
-
+    
+    // Start session if not active
 	session_start();
 	
-	header("Location: shoppingShoppingBasket.php");
+	// Redirect to Shopping Basket
+	header("Location: shoppingBasket.php");
 	
-	// connect to database
+	// Connect to the database
 	$mysqli = new mysqli("mysql.cs.uky.edu", "mage223", "u0688279", "mage223");
 	
-	// check connection 
+	// Check database connection for error
 	if (mysqli_connect_errno()) 
 	{
-		printf("Failed to Connect: %s\n", mysqli_connect_error());
 		return false;
 	}
 	
-	// set up DB Query and execute it
+	// Delete the item from the Basket table
 	$r = $mysqli->query("DELETE FROM Basket WHERE cID='$_SESSION[username]' AND
 	     itemNumber='$_POST[itemNumber]'");
 	
-	if ($r) 
-	{
-		$r->close();
-	}
-	
-	// close the connection
+	// Close the database connection
 	if ($mysqli) 
 	{
 		$mysqli->close();

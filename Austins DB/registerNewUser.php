@@ -1,38 +1,65 @@
 <?php
+
+    // Start session if not active
     session_start();
 
-    if (isset($_SESSION['privilege'])) 
+    // If logged in
+    if (isset($_SESSION['username'])) 
     {
+        // If staff, go to staff page
     	if (intval($_SESSION['privilege']) > 1) 
     	{
     		header("Location: viewInventory.php");
     	} 
+    	// If customer, go to customer page
     	else 
     	{
     		header("Location: customerInventory.php");
     	}
     } 
+    // If not logged in
     else 
     {
 ?>
 <html>
     <head>
+        
+        <!-- Reference stylesheet -->
         <link rel="stylesheet" type="text/css" href="style.css">
+        
+        <!-- Set title bar with company name -->
         <h2 class="div-padding">A & G Company</h2>
+        
+        <!-- Set title for webpage -->
         <title>New User</title>
+        
     </head>
     
     <body>
-        <?php include "message.php"?>
+        
+        <!-- Display message if one exists -->
+        <?php include "message.php" ?>
+        
         <br> <br> <br>
+        
+        <!-- Create fields for user info -->
         <div class="box">
+            
             <form method="POST" action="register.php">
+                
+                <!-- Starred values are required -->
                 Username: * <br><input type="text" name="username"><br><br>
+                
                 Password: * <br><input type="text" name="password"><br><br>
+                
                 First Name: * <br><input type="text" name="firstName"><br><br>
+                
                 Last Name: <br><input type="text" name="lastName"><br><br>
+                
                 Street: <br><input type="text" name="street"><br><br>
+                
                 City: <br><input type="text" name="city"><br><br>
+                
                 State: <br><select name="state">
                     <option value=""></option>
                     <option value="AL">Alabama</option>
@@ -87,11 +114,16 @@
                     <option value="WI">Wisconsin</option>
                     <option value="WY">Wyoming</option>
                 </select><br><br>
+                
                 Zip: <br><input type="text" name="zip"><br><br>
+                
                 <input type="submit" value="Register"><br>
+                
             </form>
+            
         </div>
         
+        <!-- Give user a clickable text to go back to login screen -->
         <h4 align="center">
             <a align="center" href="index.php">Go back</a>
         </h4> 

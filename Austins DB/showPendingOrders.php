@@ -1,33 +1,34 @@
 <?php 
 	    
-    // connect to database
+    // Connect to the database
 	$mysqli = new mysqli("mysql.cs.uky.edu", "mage223", "u0688279", "mage223");
 
-	// check connection 
+	// Check the database connection for error
 	if (mysqli_connect_errno()) 
 	{
-		printf("Failed to Connect: %s\n", mysqli_connect_error());
-		
 		return false;
 	}
 
+    // Get orderIDs and totals
 	$r = $mysqli->query("SELECT orderID, total FROM Orders WHERE status = 'false'");
 
 	echo '<div align="center" class="div-orders">';
 
 	echo '<p class="order-line">Pending Orders</p><br>';
 	
+	// For every order
 	while ($row = $r->fetch_array()) 
 	{  
+	    // Make sure two decimal places
 	    $temp = sprintf('%0.2f', $row[1]);
 	    
+	    // Display orderID and total
 		echo "<p style=\"font-size:1.25em;\">Order Number: $row[0] &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Total: $$temp</p>";
 	
 		echo "<form method=\"POST\" action=\"shipOrder.php\">
                 <input type=\"hidden\" name=\"orderID\" value=\"$row[0]\">";
-                
-		$query = "SELECT u.id FROM Users u, Places c WHERE c.orderID ='$row[0]' AND c.cId = u.id";
-		
+        
+        // Get and display userID
 		$cr = $mysqli->query("SELECT u.id FROM Users u, Places c WHERE
 		     c.orderID ='$row[0]' AND c.cId = u.id");
 		
@@ -37,6 +38,10 @@
 	
 		echo "<br><br>";
 	
+	
+	    /*
+	        Display column names
+	    */
 		echo '<div align="center" class="div-inventory" style="margin-left:23%;">';
 
             echo '<div class="inv-id" style="background-color: #F0F0F0;">';
@@ -77,7 +82,7 @@
 
     	echo '</div>';
     	
-    	
+    	// Get item info for this order
 		$items = $mysqli->query("SELECT i.itemNumber, i.name, i.amount, oc.amount,
 		     i.price, i.promotion FROM Item i, Contains oc WHERE orderID = '$row[0]' AND
 		     oc.itemNumber = i.itemNumber");
@@ -86,10 +91,12 @@
 	
     	$ship = true;
 
+        // For every item in the order
     	while ($r2 = $items->fetch_array()) 
     	{   
     	    echo '<div class="div-inventory" style="margin-left:23%;">';
 
+            // Check if quantity ordered is more than what is in stock
             if ($r2[2] < $r2[3])
             {
                 $ship = false;
@@ -99,6 +106,7 @@
     	    {
     	        $field = 1;
 
+                // Set the column widths
     	        switch ($i)
     	        {
     	            case 0:
@@ -131,6 +139,7 @@
             
                 if ($field == 1)
                 {
+                    // Alternate color
                     if ($count % 2 == 0)
             	    {
                 	    echo 'background-color: white;">';   
@@ -143,6 +152,7 @@
                     echo '<p style="font-size:medium;">';
                     if ($i == 4)
                     {
+                        // Set price after promotion included
                         echo "$";
                         $p1 = $r2[$i];
                         $p2 = $r2[$i-1];
@@ -169,8 +179,10 @@
 	
     	echo "<br>";
 	
+	    // If the stock > quantity ordered
     	if ($ship)
     	{
+    	    // Show the 'Ship Order' button
     	    echo "<div style=\"margin-right:0px;\"><input type=\"submit\" value=\"Ship Order\"></div></form><br>";
 	    }
 
@@ -180,12 +192,7 @@
 	
 	echo "</div>";
 
-	if ($r) 
-	{
-		$r->close();
-	}
-
-	// close the connection
+	// Close the database connection
 	if ($mysqli) 
 	{
 		$mysqli->close();

@@ -1,42 +1,41 @@
 <?php 
 
+    // Start session if not active
 	session_start();
 	
+	// Redirect to manageStock.php
 	header("Location: manageStock.php");
 	
-	// connect to database
+	// Connect to the database
 	$mysqli = new mysqli("mysql.cs.uky.edu", "mage223", "u0688279", "mage223");
 	
-	// check connection 
+	// Check the database connection 
 	if (mysqli_connect_errno()) 
 	{
-		printf("Failed to Connect: %s\n", mysqli_connect_error());
 		return false;
 	}
 	
-	// set up DB Query and execute it
+	// Get all items
 	$r = $mysqli->query("SELECT itemNumber FROM Item");
 	
+	// For every item
 	while ($item = $r->fetch_array()) 
 	{
+	    // If a value was input for this item
 		if (isset($_POST[$item[0]])) 
 		{
+		    // If the value is greater than 0
 			if (intval($_POST[$item[0]]) > 0) 
 			{
-				$inc = intval($_POST[$item[0]]);
+				$val = intval($_POST[$item[0]]);
 				
-				$result = $mysqli->query("UPDATE Item SET amount = amount + '$inc'
+				$result = $mysqli->query("UPDATE Item SET amount = amount + '$val'
 				    WHERE itemNumber = '$item[0]'");
 			}
 		}
 	}
 	
-	if ($r) 
-	{
-		$r->close();
-	}
-	
-	// close the connection
+	// Close the database connection
 	if ($mysqli) 
 	{
 		$mysqli->close();

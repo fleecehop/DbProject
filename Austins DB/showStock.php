@@ -1,28 +1,32 @@
 <?php 
 
-	if (!isset($_SESSION['privilege'])) 
+    // If not logged in
+	if (!isset($_SESSION['username'])) 
 	{
 		header("Location: index.php");
 	}
+	// If logged in
 	else 
 	{
-		// connect to database
+		// Connect to the database
 	    $mysqli = new mysqli("mysql.cs.uky.edu", "mage223", "u0688279", "mage223");
 	
-    	// check connection 
+    	// Check the database connection for error
     	if (mysqli_connect_errno()) 
     	{
-    		printf("Failed to Connect: %s\n", mysqli_connect_error());
     		return false;
 	    }
 	
-	    // set up DB Query and execute it
+	    // Get all items
     	$result = $mysqli->query("SELECT * FROM Item");
 	
     	echo "<br>";
 	
     	echo '<div class="div-inventory">';
 	    
+	    /*
+	        Display first column if staff/manager and start at 0
+	    */
     	    $j = 0;
 	    
         	if (intval($_SESSION['privilege']) > 1) 
@@ -38,6 +42,8 @@
         		$j = 1;
         	}
 	
+	
+	        // Display the rest of the columns for everyone
     	    echo '<div class="inv-name" style="background-color: #F0F0F0;">';
     	        echo '<p style="font-size:medium;">';
     	            echo "<b>Name</b>";
@@ -78,6 +84,7 @@
 	
     	$count = 0;
 	
+	    // For every item
     	while ($row = $result->fetch_array()) 
     	{
     	    echo '<div class="div-inventory">';
@@ -85,6 +92,7 @@
     	    for ($i = $j; $i < $mysqli->field_count + 1; $i++) 
     	    {
 	        
+	            // Set column widths
     	        switch ($i)
     	        {
     	            case 0:
@@ -116,6 +124,7 @@
     	                break;
                 }
             
+                // Alternate colors
                 if ($i != $mysqli->field_count)
                 {
                     if ($count % 2 == 0)
@@ -127,11 +136,10 @@
             	        echo 'background-color: #F0F0F0;">';
             	    }
         	
-            
-                    //echo '<div class="inv-name">';
                     echo '<p style="font-size:medium;">';
                     if ($i == 5)
                     {
+                        // Make sure two decimal places
                         $temp = sprintf('%0.2f', $row[$i]);
                         
                         echo "$$temp";
@@ -144,6 +152,7 @@
         			echo "</p>";
         			echo '</div>';
     		    }
+    		    // if not in viewInventory, add input fields as the last column
     		    else if (!isset($_SESSION['view'])) 
     		    {
     		        echo "<div class=\"inv-price\" style=\"margin-left:3%;\"><input type=\"text\"name=\"$row[0]\"></div>";
@@ -157,6 +166,7 @@
 	
     	echo '<br>';
 	
+	    // Unset view or promotions sessions
     	if (isset($_SESSION['view'])) 
     	{
     		unset($_SESSION['view']);
@@ -166,12 +176,7 @@
     		unset($_SESSION['promotions']);
     	}
 	
-    	if ($result) 
-    	{
-    		$result->close();
-    	}
-	
-    	// close the connection
+    	// Close the database connection
     	if ($mysqli) 
     	{
     		$mysqli->close();

@@ -1,40 +1,46 @@
 <?php 
 
+    // Start session if not active
 	session_start();
 	
+	// Redirect to managePromotions.php
     header("Location: managePromotions.php");
 	
-	// connect to database
+	// Connect to the database
 	$mysqli = new mysqli("mysql.cs.uky.edu", "mage223", "u0688279", "mage223");
 	
-	// check connection 
+	// Check the database connection for error
 	if (mysqli_connect_errno()) 
 	{
-		printf("Failed to Connect: %s\n", mysqli_connect_error());
-		
 		return false;
 	}
 	
-	// set up DB Query and execute it
-	$r = $mysqli->query("SELECT itemNumber FROM Item"); // Execute the Query 
+	// Select all items
+	$r = $mysqli->query("SELECT itemNumber FROM Item");
 	
+	// For every item
 	while ($item = $r->fetch_array()) 
 	{
+	    // If the value is a number
 		if (is_numeric($_POST[$item[0]])) 
 		{
-				$inc = intval($_POST[$item[0]]);
+		    
+				$val = intval($_POST[$item[0]]);
 				
-				if ($inc < 0 || $inc > 100) 
+				// If the number is not between 0 and 100
+				if ($val < 0 || $val > 100) 
 				{
-					$_SESSION['error'] = $_SESSION['error']."Error: Promotion rate must be between 0 and 100. Promotion was not updated for ItemID: $currItem[0]<br>";
+					$_SESSION['error'] = $_SESSION['error']."Promotion rate must be between 0 and 100.<br>";
 				} 
 				else 
 				{
 				    $ID = $item[0];
 				    
-					$result = $mysqli->query("UPDATE Item SET promotion='$inc' WHERE
+				    // Update Item tablw with new promotion rate
+					$result = $mysqli->query("UPDATE Item SET promotion='$val' WHERE
 					    itemNumber = $ID");
-					    
+					 
+					// Display success or failure message    
 					if ($result != 1) 
 					{
 						$_SESSION['error'] = $_SESSION['error']."Promotion rate was not updated for Item ID: $ID<br>"; 
@@ -48,7 +54,7 @@
 		}
 	}
 	
-	// close the connection
+	// Close the database connection
 	if ($mysqli) 
 	{
 		$mysqli->close();

@@ -1,61 +1,62 @@
 <?php 
 
+    // Start a connection if one is not started
 	session_start();
 	
+	// Set return location to customerInventory.php
 	header("Location: customerInventory.php");
 	
-	// connect to database
+	// Connect to the Database
 	$mysqli = new mysqli("mysql.cs.uky.edu", "mage223", "u0688279", "mage223");
 	
-	// check connection 
+	// Check for connection error 
 	if (mysqli_connect_errno()) 
 	{
-		printf("Failed to Connect: %s\n", mysqli_connect_error());
 		return false;
 	}
 	
-	// insert username into Shopping Basket as cID
-	
-	// set up DB Query and execute it
 	$r = $mysqli->query("SELECT itemNumber FROM Item"); // Execute the Query 
 	
-	while ($currItem = $r->fetch_array()) 
+	// Loop through the items in Inventory
+	while ($item = $r->fetch_array()) 
 	{
-		if (isset($_POST[$currItem[0]])) 
+	    // If the item's field was populated by the user
+		if (isset($_POST[$item[0]])) 
 		{
-		    $inc = intval($_POST[$currItem[0]]);
+		    // Get the value of the field
+		    $val = intval($_POST[$item[0]]);
 		    
-			if ($inc > 0) 
+			if ($val > 0) 
 			{
+			    // Get the current items in the basket
 				$r2 = $mysqli->query("SELECT * FROM Basket WHERE
-				    cID='$_SESSION[username]' AND itemNumber='$currItem[0]'");
+				    cID='$_SESSION[username]' AND itemNumber='$item[0]'");
 				
-				if ($r2->num_rows > 0 )  // item exists in cart update quantity
+				// If the item is in the basket already
+				if ($r2->num_rows > 0 )
 				{
-				    $r3 = $mysqli->query("UPDATE Basket SET amount=amount+'$inc' WHERE
-				         itemNumber = '$currItem[0]' AND cID='$_SESSION[username]'");
+				    // Update the item in the Basket table
+				    $r3 = $mysqli->query("UPDATE Basket SET amount=amount+'$val' WHERE
+				         itemNumber = '$item[0]' AND cID='$_SESSION[username]'");
 				    
 				} 
+				// If the item is not in the basket already
 				else 
-				{   // does not exist, insert into shopping cart
+				{   
+				    // Add the item to the Basket table
 				    $r3 = $mysqli->query("INSERT INTO Basket VALUES
-				         ('$_SESSION[username]','$currItem[0]','$inc')");
+				         ('$_SESSION[username]','$item[0]','$val')");
 				    
 				}
 			}
 		}
 	}
 	
-	if ($result) {
-		$result->close();
-	}
-	
-	// close the connection
-	if ($mysqli) {
+	// Close the database connection
+	if ($mysqli) 
+	{
 		$mysqli->close();
 	}
-	
-	
 	
 ?> 
 
