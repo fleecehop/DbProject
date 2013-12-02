@@ -9,7 +9,7 @@
 	
 	else 
 	{
-		header("Location: shoppingBasket.php");
+		header("Location: shoppingShoppingBasket.php");
 
     	$mysqli = new mysqli("mysql.cs.uky.edu", "gttu222", "u0670864", "gttu222");
 
@@ -32,7 +32,7 @@
     	}
     	
     	$r= $mysqli->query("SELECT sum(s.amount*(i.price-i.price*(i.promotion/100))) 
-    	    FROM Item i, ShoppingBasket s WHERE s.cID='$_SESSION[username]' AND
+    	    FROM Item i, Basket s WHERE s.cID='$_SESSION[username]' AND
     	    i.itemNumber=s.itemNumber");
     	    
     	$total = $r->fetch_array();
@@ -44,7 +44,7 @@
     	$r = $mysqli->query("INSERT INTO Places VALUES
     	     ('$_SESSION[username]','$id')");
 	
-    	$r = $mysqli->query("SELECT B.itemNumber, B.amount FROM ShoppingBasket B WHERE cID = 
+    	$r = $mysqli->query("SELECT B.itemNumber, B.amount FROM Basket B WHERE cID = 
     	    '$_SESSION[username]'");
     	    
     	while($row = $r->fetch_array())
@@ -53,7 +53,7 @@
         	     ('$id','$row[0]','$row[1]')");
     	}
 	
-    	$r = $mysqli->query("DELETE FROM ShoppingBasket WHERE
+    	$r = $mysqli->query("DELETE FROM Basket WHERE
     	     cID='$_SESSION[username]'");
 	
     	if ($r) 

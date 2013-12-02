@@ -31,7 +31,7 @@
 	
     	<div class="header-div" style="float:right;">
     	    <a href="logout.php" class="menu-option">Log Out </a>
-    	    <a href="shoppingBasket.php" class="menu-option">Shopping Basket</a>
+    	    <a href="shoppingShoppingBasket.php" class="menu-option">Shopping Basket</a>
     	    <a href="customerInventory.php" class="menu-option">Return To Store </a>
     	
     	</div>

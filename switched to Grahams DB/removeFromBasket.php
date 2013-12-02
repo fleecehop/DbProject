@@ -2,7 +2,7 @@
 
 	session_start();
 	
-	header("Location: shoppingShoppingBasket.php");
+	header("Location: shoppingBasket.php");
 	
 	// connect to database
 	$mysqli = new mysqli("mysql.cs.uky.edu", "gttu222", "u0670864", "gttu222");
